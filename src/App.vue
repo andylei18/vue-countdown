@@ -14,8 +14,8 @@ export default {
     return {
       time:{
         id:'001',
-        servertime:'2015/5/18 10:39:50',
-        endtime:'2015/5/18 10:40:20',
+        servertime:'2015/5/18 11:02:50',
+        endtime:'2015/5/18 11:03:20',
       }
     }
   },

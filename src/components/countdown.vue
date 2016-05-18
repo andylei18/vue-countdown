@@ -3,7 +3,7 @@
 	<div class="ui-app">
 		
 		<div class="time-banner">
-			<div class="time-clock time">
+			<div class="time-clock time" v-if="msTime.show">
 				还剩: 
 				<span class="day">{{msTime.day}}</span>
 				天<span class="hour">{{msTime.hour}}</span>
@@ -11,6 +11,7 @@
 				分<span class="sec">{{msTime.seconds}}</span>
 				秒
 			</div>
+			<p class="over" v-show="over">活动已经结束</p>
 		</div>
 
 	</div>
@@ -22,16 +23,18 @@
 		replace:true,
 		data () {
 			return {
-				msTime:{
+				msTime:{	//倒计时数值
+					show:false,
 					day:'',
 					hour:'',
 					minutes:'',
 					seconds:''
 				},
-				star:'',
-				end:'',
-				nowClient:'',
-				severClient:''
+				star:'',	//活动开始时间
+				end:'',		//活动结束时间
+				nowClient:'', //客户端时间
+				severClient:'',
+				over:false	//结束状态
 			}
 		},
 		props:{
@@ -56,9 +59,12 @@
 		},
 		compiled () {
 			const self = this
-			self.star = new Date(self.servertime).getTime()      //活动开始时间
-			self.end  = new Date(self.endtime).getTime()	     //活动结束时间
-			self.nowClient  = new Date().getTime()				 //客户端时间
+			self.star = new Date(self.servertime).getTime()      
+			self.end  = new Date(self.endtime).getTime()	     
+			self.nowClient  = new Date().getTime()				
+
+			console.log(self.star - self.nowClient)
+
 			self.severClient = self.star - self.nowClient
 			setTimeout(self.runTime,1)
 		},
@@ -72,13 +78,17 @@
 				timeNow = new Date().getTime()+ self.severClient
 				timeDistance = self.end - timeNow
 				if( timeDistance > 0 ){
+					self.over = false
+					self.msTime.show = true
+
+
 					msTime.day = Math.floor( timeDistance / 86400000 )
 					timeDistance-= msTime.day * 86400000
 					msTime.hour = Math.floor( timeDistance / 3600000 )
 					timeDistance-= msTime.hour * 3600000
 					msTime.minutes = Math.floor( timeDistance / 60000 )
 					timeDistance-= msTime.minutes * 60000
-					msTime.seconds = timeDistance / 1000 
+					msTime.seconds = new Number(timeDistance / 1000).toFixed(2)
 					timeDistance-= msTime.seconds * 1000
 			
 					if( msTime.hour < 10){
@@ -90,11 +100,11 @@
 					if(msTime.seconds < 10) {
 						msTime.seconds = "0" + msTime.seconds
 					}
-					if(msTime.day==0&&msTime.hour==0&&msTime.minutes&&msTime.seconds){
-					}
 					setTimeout(self.runTime,1)
 				}
-				else if(timeDistance == 0){
+				else {
+					self.over = true
+					self.msTime.show = false
 				}
 			}
 		}
@@ -111,5 +121,8 @@
 	}
     .time-banner .day,.time-banner .hour,.time-banner .min,.time-banner .sec {
 	    padding: 0 3px
+	}
+	.time-banner .over{
+		color: #ff0000
 	}
 </style>
