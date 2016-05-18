@@ -1,6 +1,9 @@
 # vue-countdown
 
 > A Vue.js project
+========
+
+## [Live demo](http://andylei18.github.io/vue-countdown/)
 
 ## Build Setup
 
