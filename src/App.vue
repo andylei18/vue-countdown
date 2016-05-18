@@ -2,7 +2,7 @@
 
   <div id="app">
     
-   
+    <count-down :endtime="time.endtime" :id="time.id" :servertime="time.servertime"></count-down>
 
     <div id="container">
 
@@ -11,10 +11,6 @@
         <header>
           <h1>Vue-countdown</h1>
           <h2></h2>
-
-          <count-down :endtime="time.endtime" :id="time.id" :servertime="time.servertime"></count-down>
-
-
         </header>
 
         <section id="downloads" class="clearfix">
@@ -73,8 +69,8 @@ export default {
     return {
       time:{
         id:'001',
-        servertime:'2016/05/18 11:54:59', 
-        endtime:'2017/05/25 11:55:00',
+        servertime:'2015/05/18 11:54:59', 
+        endtime:'2015/05/18 11:55:00',
       }
     }
   },
@@ -85,19 +81,32 @@ export default {
   events: {
     'callback' (msg) {
       // 事件回调内的 `this` 自动绑定到注册它的实例上
-      consle.log('活动时间到了')
+      console.log('收到消息了')
     }
   }
 }
 </script>
-<style src="././assets/stylesheets/print.css"></style>
-<style src="././assets/stylesheets/github-dark.css"></style>
-<style src="././assets/stylesheets/stylesheet.css"></style>
-<style type="text/css">
-  .ui-app{
-    padding: 100px 0;
-    color: #303030;
-    font-size: 20px;
-    font-weight: bold;
-  }
+
+<style>
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+#app {
+  color: #2c3e50;
+  margin-top: -100px;
+  max-width: 800px;
+  min-width: 600px;
+  font-family: Source Sans Pro, Helvetica, sans-serif;
+  text-align: center;
+  margin: 0 auto;
+}
+
 </style>
