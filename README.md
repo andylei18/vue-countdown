@@ -1,5 +1,4 @@
 # vue-countdown
-========
 
 ## [Live demo](http://andylei18.github.io/vue-countdown/)
 
@@ -15,4 +14,23 @@ npm run dev
 # build for production with minification
 npm run build
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+# Options
+* :endtime      String
+* :id           String
+* :servertime	String
+* callback      Function
+
+
+
+
+# countdown.vue
+
+
+```
+<template>
+	
+	<count-down :endtime="time.endtime" :id="time.id" :servertime="time.servertime"></count-down>
+
+</template>
+
+```
