@@ -26,11 +26,9 @@ npm run build
 # countdown.vue
 
 
-```
 <template>
 	
 	<count-down :endtime="time.endtime" :id="time.id" :servertime="time.servertime"></count-down>
 
 </template>
 
-```
