@@ -11,7 +11,7 @@
 				分<span class="sec">{{msTime.seconds}}</span>
 				秒
 			</div>
-			<p class="over" v-show="!msTime.show">{{text}}}</p>
+			<p class="over" v-show="!msTime.show">{{text}}</p>
 		</div>
 
 	</div>
@@ -32,7 +32,8 @@
 				},
 				star:'',			//活动开始时间
 				end:'',				//活动结束时间
-				severClient:''		//服务端时间	
+				severClient:'',		//服务端时间	
+				callback(){}
 			}
 		},
 		props:{
@@ -61,17 +62,14 @@
 			self.end  = ( new Date(self.endtime) ).getTime()	     
 			self.nowClient  = ( new Date() ).getTime()			
 
-
 			if(self.end - self.star < 1000){
 				self.msTime.show = false
+				self.message()
 			}else{
 				self.msTime.show = true
-
 				self.severClient = self.star - self.nowClient
 				setTimeout(self.runTime,1)
 			}
-
-			
 		},
 		methods: {
 			runTime () {
@@ -107,7 +105,11 @@
 				}
 				else {
 					self.msTime.show = false
+					self.message()
 				}
+			},
+			message () {
+				this.$dispatch('callback',this.msTime.show)
 			}
 		}
 	}

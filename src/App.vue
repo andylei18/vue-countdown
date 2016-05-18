@@ -14,13 +14,20 @@ export default {
     return {
       time:{
         id:'001',
-        servertime:'2015/05/18 11:49:50', 
-        endtime:'2015/05/23 11:50:00',
+        servertime:'2015/05/18 11:54:59', 
+        endtime:'2015/05/18 11:55:00',
       }
     }
   },
   components: {
     CountDown
+  },
+  // 在创建实例时 `events` 选项简单地调用 `$on`
+  events: {
+    'callback' (msg) {
+      // 事件回调内的 `this` 自动绑定到注册它的实例上
+      console.log('收到消息了')
+    }
   }
 }
 </script>
